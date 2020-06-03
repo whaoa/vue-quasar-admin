@@ -1,27 +1,40 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+import { LoadingBar } from 'quasar'
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-];
+import { setTitle } from '@/utils'
+
+import routes from './routes'
+
+// fix vue-router NavigationDuplicated
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location) {
+  return VueRouterPush.call(this, location).catch(err => err)
+}
+const VueRouterReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace (location) {
+  return VueRouterReplace.call(this, location).catch(err => err)
+}
+
+Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes,
-});
+})
 
-export default router;
+// 路由拦截
+// TODO 权限验证
+router.beforeEach((to, from, next) => {
+  LoadingBar.start()
+  next()
+})
+
+router.afterEach(to => {
+  // 进度条
+  LoadingBar.stop()
+  // 更改标题
+  setTitle(to.meta.title)
+})
+
+export default router

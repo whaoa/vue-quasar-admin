@@ -1,14 +1,21 @@
 {
   "name": "vue-quasar-admin",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
+    "dev": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "commit": "npm run changelog && git add -A && ./node_modules/.bin/git-cz",
+    "changelog": "./node_modules/.bin/auto-changelog -p"
   },
   "dependencies": {
+    "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
+    "dayjs": "^1.8.28",
+    "lodash": "^4.17.15",
+    "quasar": "^1.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
@@ -20,12 +27,21 @@
     "@vue/cli-plugin-vuex": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
+    "auto-changelog": "^2.0.0",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-imports": "1.5.0",
+    "compression-webpack-plugin": "^4.0.0",
     "eslint": "^6.7.2",
+    "eslint-import-resolver-webpack": "^0.12.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
+    "git-cz": "^4.6.2",
+    "node-sass": "^4.13.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "svg-sprite-loader": "^5.0.0",
+    "vue-cli-plugin-quasar": "~2.0.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }
