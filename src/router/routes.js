@@ -6,6 +6,7 @@ export default [
     name: 'index',
     meta: { title: '首页' },
     component: MainLayout,
+    redirect: '/',
     children: [
       {
         path: '',
@@ -13,6 +14,7 @@ export default [
           icon: 'home',
           title: 'Home',
         },
+        name: 'home',
         component: () => import('@/views/Home'),
       },
     ],
@@ -24,6 +26,7 @@ export default [
       title: '关于',
       caption: '了解更多信息',
     },
+    redirect: '/about',
     component: MainLayout,
     children: [
       {

@@ -7,6 +7,8 @@ import router from './router'
 import store from './store'
 import './quasar'
 
+import './styles/transition.scss'
+
 Vue.use(QA)
 
 Vue.config.productionTip = false

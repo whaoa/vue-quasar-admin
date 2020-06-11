@@ -19,31 +19,32 @@
 
         <q-space/>
 
-        <q-input class="toolbar-input" outlined dense v-model="search"
-                 color="bg-grey-7" placeholder="Search for topics, locations & sources">
-          <template v-slot:prepend>
-            <q-icon v-if="search === ''" name="search"/>
-            <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''"/>
-          </template>
-        </q-input>
+        <!-- 搜索栏 -->
+        <header-search />
 
         <q-space/>
 
         <div class="q-gutter-sm row items-center no-wrap">
-          <q-btn v-if="$q.screen.gt.sm" round dense flat color="text-grey-7" icon="apps">
-            <q-tooltip>Apps</q-tooltip>
+          <q-btn
+            v-if="$q.screen.gt.sm"
+            round
+            dense
+            flat
+            color="text-grey-7"
+            :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
+            @click="$q.fullscreen.toggle()"
+          >
+            <q-tooltip>全屏显示</q-tooltip>
           </q-btn>
           <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge color="red" text-color="white" floating>
-              2
-            </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
+            <q-badge color="red" text-color="white" floating>2</q-badge>
+            <q-tooltip>消息通知</q-tooltip>
           </q-btn>
           <q-btn round flat>
             <q-avatar size="26px">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png" alt="avatar">
             </q-avatar>
-            <q-tooltip>Account</q-tooltip>
+            <q-tooltip>用户中心</q-tooltip>
           </q-btn>
         </div>
       </q-toolbar>
@@ -57,171 +58,58 @@
       :width="280"
     >
       <q-scroll-area class="fit">
-        <q-list padding>
-          <q-item class="drawer-item" v-for="link in links1" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon :name="link.icon"/>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator class="q-my-md"/>
-
-          <q-item class="drawer-item" v-for="link in links2" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon :name="link.icon"/>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator class="q-mt-md q-mb-xs"/>
-
-          <q-item-label header class="text-weight-bold text-uppercase">
-            More from Youtube
-          </q-item-label>
-
-          <q-item class="drawer-item" v-for="link in links3" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon :name="link.icon"/>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator class="q-my-md"/>
-
-          <q-item class="drawer-item" v-for="link in links4" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon :name="link.icon"/>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator class="q-mt-md q-mb-lg"/>
-
-          <div class="q-px-md text-grey-9">
-            <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-              <a
-                v-for="button in buttons1"
-                :key="button.text"
-                class="drawer-footer-link"
-                href="javascript:void(0)"
-              >
-                {{ button.text }}
-              </a>
-            </div>
+        <side-bar-menu :menus="menus" />
+        <div class="q-px-md text-grey-9">
+          <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
+            <a
+              v-for="button in buttons1"
+              :key="button.text"
+              class="drawer-footer-link"
+              href="javascript:void(0)"
+            >
+              {{ button.text }}
+            </a>
           </div>
-          <div class="q-py-md q-px-md text-grey-9">
-            <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-              <a
-                v-for="button in buttons2"
-                :key="button.text"
-                class="drawer-footer-link"
-                href="javascript:void(0)"
-              >
-                {{ button.text }}
-              </a>
-            </div>
+        </div>
+        <div class="q-py-md q-px-md text-grey-9">
+          <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
+            <a
+              v-for="button in buttons2"
+              :key="button.text"
+              class="drawer-footer-link"
+              href="javascript:void(0)"
+            >
+              {{ button.text }}
+            </a>
           </div>
-        </q-list>
+        </div>
       </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
-      <router-view/>
+      <transition appear mode="out-in" name="fade-transverse">
+        <router-view />
+      </transition>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
+import menus from '@/router/routes'
+import HeaderSearch from './components/HeaderSearch'
+import SideBarMenu from './components/SideBarMenu'
+
 export default {
   name: 'MainLayout',
+  components: {
+    HeaderSearch,
+    SideBarMenu,
+  },
   data () {
     return {
+      menus,
       leftDrawerOpen: false,
       search: '',
-      showAdvanced: false,
-      showDateOptions: false,
-      exactPhrase: '',
-      hasWords: '',
-      excludeWords: '',
-      byWebsite: '',
-      byDate: 'Any time',
-      links1: [
-        {
-          icon: 'home',
-          text: 'Home',
-        },
-        {
-          icon: 'whatshot',
-          text: 'Trending',
-        },
-        {
-          icon: 'subscriptions',
-          text: 'Subscriptions',
-        },
-      ],
-      links2: [
-        {
-          icon: 'folder',
-          text: 'Library',
-        },
-        {
-          icon: 'restore',
-          text: 'History',
-        },
-        {
-          icon: 'watch_later',
-          text: 'Watch later',
-        },
-        {
-          icon: 'thumb_up_alt',
-          text: 'Liked videos',
-        },
-      ],
-      links3: [
-        {
-          icon: 'fabYoutube',
-          text: 'YouTube Premium',
-        },
-        {
-          icon: 'local_movies',
-          text: 'Movies & Shows',
-        },
-        {
-          icon: 'videogame_asset',
-          text: 'Gaming',
-        },
-        {
-          icon: 'live_tv',
-          text: 'Live',
-        },
-      ],
-      links4: [
-        {
-          icon: 'settings',
-          text: 'Settings',
-        },
-        {
-          icon: 'flag',
-          text: 'Report history',
-        },
-        {
-          icon: 'help',
-          text: 'Help',
-        },
-        {
-          icon: 'feedback',
-          text: 'Send feedback',
-        },
-      ],
       buttons1: [
         { text: 'About' },
         { text: 'Press' },
@@ -245,10 +133,6 @@ export default {
 <style lang="scss">
   .toolbar {
     height: 64px;
-
-    &-input {
-      width: 55%;
-    }
   }
 
   .drawer-item {

@@ -2,8 +2,20 @@ import Vue from 'vue'
 
 import {
   Quasar,
-  LoadingBar,
+  // 组件
   QAjaxBar,
+  QIcon,
+  QList,
+  QItem,
+  QItemLabel,
+  QItemSection,
+  QSeparator,
+  QExpansionItem,
+  // 插件
+  LoadingBar,
+  AppFullscreen,
+  // 指令
+  Ripple,
 } from 'quasar'
 
 import lang from 'quasar/lang/zh-hans'
@@ -12,7 +24,7 @@ Vue.use(Quasar, {
   lang,
   config: {
     loadingBar: {
-      color: 'blue',
+      color: 'blue-grey',
       size: '5px',
       position: 'top',
       skipHijack: true,
@@ -20,9 +32,19 @@ Vue.use(Quasar, {
   },
   components: {
     QAjaxBar,
+    QList,
+    QIcon,
+    QItem,
+    QItemLabel,
+    QItemSection,
+    QSeparator,
+    QExpansionItem,
   },
-  directives: {},
+  directives: {
+    Ripple,
+  },
   plugins: {
     LoadingBar,
+    AppFullscreen,
   },
 })
