@@ -11,6 +11,8 @@ import {
   QItemSection,
   QSeparator,
   QExpansionItem,
+  QIntersection,
+  QScrollArea,
   // 插件
   LoadingBar,
   AppFullscreen,
@@ -39,6 +41,8 @@ Vue.use(Quasar, {
     QItemSection,
     QSeparator,
     QExpansionItem,
+    QIntersection,
+    QScrollArea,
   },
   directives: {
     Ripple,
