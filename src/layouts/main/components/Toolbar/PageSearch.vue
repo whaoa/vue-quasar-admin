@@ -61,7 +61,7 @@ function deepMap (routerArray) {
 const options = deepMap(routes)
 
 export default {
-  name: 'HeaderSearch',
+  name: 'PageSearch',
   data () {
     return {
       model: null,

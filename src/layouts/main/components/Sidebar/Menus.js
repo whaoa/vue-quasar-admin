@@ -1,5 +1,5 @@
 export default {
-  name: 'SideBarMenu',
+  name: 'SideBarMenus',
   props: {
     menus: {
       type: Array,
