@@ -60,7 +60,38 @@ export const systemRoutes = [
     meta: { title: '用户登录', hidden: true },
     component: () => import('@/views/login'),
   },
-  // TODO: 403, 404
+  // TODO: 403, error
+  {
+    path: '/error',
+    name: 'error',
+    meta: { title: '错误', hidden: true },
+    component: MainLayout,
+    children: [
+      {
+        path: '403',
+        name: '403',
+        meta: { title: '403', hidden: true },
+        component: () => import('@/views/error/403'),
+      },
+      {
+        path: '404',
+        name: '404',
+        meta: { title: '404', hidden: true },
+        component: () => import('@/views/error/404'),
+      },
+      {
+        path: '500',
+        name: '500',
+        meta: { title: '500', hidden: true },
+        component: () => import('@/views/error/500'),
+      },
+    ],
+  },
+  {
+    path: '*',
+    meta: { hidden: true },
+    redirect: '/error/404',
+  },
 ]
 
 export default [
