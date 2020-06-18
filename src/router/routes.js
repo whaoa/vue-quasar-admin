@@ -45,6 +45,7 @@ export const pageRoutes = [
         meta: {
           title: '关于',
           icon: 'speed',
+          auth: ['user'],
         },
         component: () => import('@/views/About'),
       },

@@ -2,20 +2,54 @@ import { Dialog, Notify } from 'quasar'
 import router from '@/router'
 import { ls } from '@/utils'
 import { Login } from '@/api/user'
+import config from '@/config'
 
 export default {
   namespaced: true,
   state: {
     // 用户信息
     userInfo: {},
+    // token 信息
+    token: {},
   },
   mutations: {
     // 设置用户信息
-    setUserInfo (state, payload = {}) {
+    setUserInfo (state, payload) {
       // 缓存到本地
-      ls.set('user_info', payload)
+      if (!payload) ls.remove('user_info')
+      else ls.set('user_info', payload)
       // 保存到 Vuex
-      state.userInfo = payload
+      state.userInfo = payload || {}
+    },
+    // 设置 token
+    setToken (state, payload) {
+      // 如果参数为空
+      if (!payload) {
+        ls.remove('token')
+        state.token = {}
+        return
+      }
+      // 如果参数是字符串
+      if (typeof payload === 'string') {
+        const token = {
+          token: payload,
+          timeStamp: Date.now(),
+          expires: config.tokenExpires,
+        }
+        ls.set('token', token)
+        state.token = token
+      } else {
+        // 如果参数是对象
+        ls.set('token', payload)
+        state.token = payload
+      }
+    },
+    // 清除登录状态信息
+    clearLoginStatus (state) {
+      ls.remove('token')
+      ls.remove('user_info')
+      state.token = {}
+      state.userInfo = {}
     },
   },
   actions: {
@@ -30,8 +64,8 @@ export default {
      */
     async login ({ commit }, { username = '', password = '' } = {}) {
       const result = await Login({ username, password })
-      // 缓存 token
-      ls.set('token', result.token)
+      // 设置 token
+      await commit('setToken', result.token)
       // 设置 vuex 用户信息
       await commit('setUserInfo', result)
       return result
@@ -45,10 +79,8 @@ export default {
      */
     logout ({ commit }, { needConfirm = false } = {}) {
       function logout () {
-        // 清空 本地 用户信息 缓存
-        ls.remove('token')
-        // 清空 vuex 用户信息
-        commit('setUserInfo', {})
+        // 清空登录状态信息
+        commit('clearLoginStatus')
         // 跳转路由
         router.push({ name: 'login' })
         // 消息提示

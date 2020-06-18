@@ -26,6 +26,7 @@ module.exports = {
     'object-curly-newline': 'off', // 对象换行
     'no-param-reassign': 'off', // 允许赋值给函数参数
     'import/extensions': ['error', 'always', { js: 'never', vue: 'never' }], // import .vue 允许省略扩展名
+    'consistent-return': 'off', // 函数必须返回一个统一类型的值
     'no-console': isProduct ? 'warn' : 'off',
     'no-debugger': isProduct ? 'warn' : 'off',
   },

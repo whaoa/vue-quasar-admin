@@ -38,22 +38,18 @@
         <q-badge color="red" text-color="white" floating>2</q-badge>
         <q-tooltip>消息通知</q-tooltip>
       </q-btn>
-      <q-btn round flat>
-        <q-avatar size="26px">
-          <img src="https://cdn.quasar.dev/img/boy-avatar.png" alt="avatar">
-        </q-avatar>
-        <q-tooltip>用户中心</q-tooltip>
-      </q-btn>
+      <user-avatar />
     </div>
   </q-toolbar>
 </template>
 
 <script>
 import PageSearch from './PageSearch'
+import UserAvatar from './UserAvatar'
 
 export default {
   name: 'Toolbar',
-  components: { PageSearch },
+  components: { UserAvatar, PageSearch },
   props: {
     sideMenuOpen: Boolean,
   },

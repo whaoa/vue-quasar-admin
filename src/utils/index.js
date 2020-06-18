@@ -1,12 +1,13 @@
 import dayjs from 'dayjs'
 import { LocalStorage, Notify } from 'quasar'
+import config from '@/config'
 import log from './log'
 
 // 项目名称
-const APP_NAME = process.env.VUE_APP_NAME || 'QAdmin'
+const { appName, envIsDev } = config
 
-// 运行环境是否为生产环境
-export const isDev = process.env.NODE_ENV === 'development'
+// 运行环境是否为开发环境
+export const isDev = envIsDev
 
 // 日志打印
 export { default as log } from './log'
@@ -19,7 +20,7 @@ export const error = {
   // 错误提示
   log: e => {
     // 打印到控制台
-    if (isDev) {
+    if (envIsDev) {
       log.danger('>>>>>> Error >>>>>>')
       console.log(e)
     }
@@ -43,7 +44,7 @@ export const error = {
  * @param {String} title 标题
  */
 export const setTitle = (title = '') => {
-  const processTitle = process.env.VUE_APP_TITLE || APP_NAME
+  const processTitle = process.env.VUE_APP_TITLE || appName
   window.document.title = `${processTitle}${title ? ` | ${title}` : ''}`
 }
 
@@ -59,10 +60,10 @@ export const openPage = url => {
   const a = document.createElement('a')
   a.setAttribute('href', url)
   a.setAttribute('target', '_blank')
-  a.setAttribute('id', `${APP_NAME}-new-tab-link`)
+  a.setAttribute('id', `${appName}-new-tab-link`)
   document.body.appendChild(a)
   a.click()
-  document.body.removeChild(document.getElementById(`${APP_NAME}-new-tab-link`))
+  document.body.removeChild(document.getElementById(`${appName}-new-tab-link`))
 }
 
 /**
@@ -80,9 +81,9 @@ export function dateFormat (date) {
  */
 export const ls = {
   LS: LocalStorage,
-  get: (key = '') => LocalStorage.getItem(`${APP_NAME}__${key.toUpperCase()}`),
-  set: (key = '', value) => LocalStorage.set(`${APP_NAME}__${key.toUpperCase()}`, value),
-  remove: (key = '') => LocalStorage.remove(`${APP_NAME}__${key.toUpperCase()}`),
+  get: (key = '') => LocalStorage.getItem(`${appName}__${key.toUpperCase()}`),
+  set: (key = '', value) => LocalStorage.set(`${appName}__${key.toUpperCase()}`, value),
+  remove: (key = '') => LocalStorage.remove(`${appName}__${key.toUpperCase()}`),
   getAll: () => LocalStorage.getAll(),
   clear: () => LocalStorage.clear(),
 }

@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import config from '@/config'
+
 export default {
   name: 'login',
   data () {
@@ -91,7 +93,7 @@ export default {
                 icon: 'check_circle',
                 message: '登录成功',
               })
-              this.$router.push('/')
+              this.$router.push(this.$route.query.redirect || { name: config.homePageName })
             })
             .finally(() => { this.loading = false })
         } else {
