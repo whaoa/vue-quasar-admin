@@ -1,6 +1,16 @@
 const MainLayout = () => import('@/layouts/main')
 
-export default [
+/**
+ * 路由配置文件
+ * QA 定义配置项：
+ * meta {Object} 路由信息配置对象
+ * meta.icon {String} 路由侧边栏图标
+ * meta.title {String} 路由页面标题
+ * meta.hidden {Boolean} 是否在侧边栏隐藏
+ * meta.auth {Array<String>} 路由权限配置
+ */
+
+export const pageRoutes = [
   {
     path: '/',
     name: 'index',
@@ -40,4 +50,19 @@ export default [
       },
     ],
   },
+]
+
+export const systemRoutes = [
+  {
+    path: '/login',
+    name: 'login',
+    meta: { title: '用户登录', hidden: true },
+    component: () => import('@/views/login'),
+  },
+  // TODO: 403, 404
+]
+
+export default [
+  ...pageRoutes,
+  ...systemRoutes,
 ]

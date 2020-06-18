@@ -43,7 +43,7 @@ import routes from '@/router/routes'
 
 function deepMap (routerArray) {
   return routerArray.reduce((t, c) => {
-    if (c.meta && c.meta.hidden) return false
+    if (c.meta && c.meta.hidden) return t
     const { meta = {}, name, children } = c
     if (children) {
       t.push(...deepMap(children))

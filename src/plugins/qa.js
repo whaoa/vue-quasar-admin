@@ -1,4 +1,4 @@
-import log from '@/utils/util.log'
+import log from '@/utils/log'
 import { setTitle, openPage, dateFormat } from '@/utils'
 
 export default {
