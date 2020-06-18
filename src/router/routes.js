@@ -60,7 +60,6 @@ export const systemRoutes = [
     meta: { title: '用户登录', hidden: true },
     component: () => import('@/views/login'),
   },
-  // TODO: 403, error
   {
     path: '/error',
     name: 'error',

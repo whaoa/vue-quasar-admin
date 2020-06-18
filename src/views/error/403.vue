@@ -10,7 +10,3 @@ export default {
   components: { Error },
 }
 </script>
-
-<style scoped>
-
-</style>
