@@ -25,7 +25,7 @@ export default {
             },
           }, this.renderMenus(createElement, children))
           result.push(group)
-          result.push(createElement('q-separator', { class: 'q-my-sm' }))
+          result.push(createElement('q-separator'))
           return
         }
         // 菜单项

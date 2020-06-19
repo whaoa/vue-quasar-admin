@@ -83,6 +83,8 @@ router.beforeEach((to, from, next) => {
 router.afterEach(to => {
   // 进度条
   LoadingBar.stop()
+  // 记录打开新标签页
+  store.commit('QA/page/open', to)
   // 更改标题
   setTitle(to.meta.title)
 })

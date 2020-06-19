@@ -50,7 +50,7 @@ modules.forEach(item => {
     }
     // 设置响应时间
     responseData.timeStamp = Date.now()
-    if (isDev) console.log(`[Axios Mock] ${url}: `, responseData)
+    if (isDev) console.log('[Axios Mock] :', config, responseData)
     // 返回数组的格式 [status, data, headers]
     return [responseData.code, responseData]
   })

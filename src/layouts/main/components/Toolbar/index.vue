@@ -17,10 +17,11 @@
 
     <q-space/>
 
-    <!-- 搜索栏 -->
-    <page-search/>
-
-    <q-space/>
+    <template v-if="$q.screen.gt.sm">
+      <!-- 搜索栏 -->
+      <page-search/>
+      <q-space/>
+    </template>
 
     <div class="q-gutter-sm row items-center no-wrap">
       <q-btn

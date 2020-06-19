@@ -13,9 +13,9 @@ module.exports = [
   { name: 'v-charts', library: 'VCharts', js: 'https://cdn.jsdelivr.net/npm/v-charts@1.19.0/lib/index.min.js', css: 'https://cdn.jsdelivr.net/npm/v-charts@1.19.0/lib/style.min.css' },
   // Quasar Frameword
   /* Quasar 使用 UMD 方式引入时，无法使用自闭合标签，且配置需在引入 Quasar 相关文件之前设置 */
-  { name: 'q', library: 'q', css: 'https://cdn.jsdelivr.net/npm/quasar@1.12.2/dist/quasar.min.css' },
   { name: 'animate.css', library: 'animate.css', css: 'https://cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css' },
   { name: 'material-icons', library: 'material-icons', css: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp' },
   { name: 'fontawesome', library: 'fontawesome', css: 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css' },
   { name: 'mdi', library: 'mdi', css: 'https://cdn.jsdelivr.net/npm/@quasar/extras@1.8.1/mdi-v5/mdi-v5.css' },
+  { name: 'q', library: 'q', css: 'https://cdn.jsdelivr.net/npm/quasar@1.12.2/dist/quasar.min.css' },
 ]

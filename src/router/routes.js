@@ -2,12 +2,17 @@ const MainLayout = () => import('@/layouts/main')
 
 /**
  * 路由配置文件
+ *
+ * ** 页面组件必须有 name 字段，QAdmin 依赖于 name 字段进行页面跳转 **
+ *
  * QA 定义配置项：
  * meta {Object} 路由信息配置对象
  * meta.icon {String} 路由侧边栏图标
  * meta.title {String} 路由页面标题
  * meta.hidden {Boolean} 是否在侧边栏隐藏
  * meta.auth {Array<String>} 路由权限配置
+ * TODO: meta.href {String} - 外部链接
+ * TODO: meta.cache {Boolean} - 页面缓存
  */
 
 export const pageRoutes = [
@@ -60,6 +65,7 @@ export const systemRoutes = [
     meta: { title: '用户登录', hidden: true },
     component: () => import('@/views/login'),
   },
+  // TODO: refresh 刷新页面
   {
     path: '/error',
     name: 'error',
