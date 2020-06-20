@@ -7,12 +7,12 @@ const MainLayout = () => import('@/layouts/main')
  *
  * QA 定义配置项：
  * meta {Object} - 路由信息配置对象
- * meta.icon {String} - 路由侧边栏图标
+ * meta.icon {String} - 路由侧边栏图标 (详见: https://quasar.dev/vue-components/icon#Webfont-usage)
  * meta.title {String} - 路由页面标题
  * meta.hidden {Boolean} - 是否在侧边栏隐藏
  * meta.auth {Array<String>} - 路由权限配置
  * meta.href {String} - 外部链接
- * TODO: meta.cache {Boolean} - 页面缓存
+ * meta.cache {Boolean} - 页面缓存
  */
 
 export const pageRoutes = [
@@ -51,6 +51,7 @@ export const pageRoutes = [
           title: '关于',
           icon: 'speed',
           auth: ['user'],
+          cache: true,
         },
         component: () => import('@/views/About'),
       },

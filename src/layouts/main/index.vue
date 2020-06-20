@@ -16,23 +16,7 @@
     </q-drawer>
 
     <q-page-container>
-      <q-page class="q-layout-padding" style="overflow: hidden;">
-        <!-- 面包屑导航 -->
-        <q-breadcrumbs>
-          <q-breadcrumbs-el
-            class="cursor-pointer"
-            v-for="item in $route.matched"
-            :key="item.name"
-            :label="item.meta && item.meta.title || item.name"
-          />
-        </q-breadcrumbs>
-        <transition appear mode="out-in" name="fade-transverse">
-          <router-view :key="$route.name" />
-        </transition>
-        <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
-          <q-btn fab icon="keyboard_arrow_up" color="accent" />
-        </q-page-scroller>
-      </q-page>
+      <page-content />
     </q-page-container>
   </q-layout>
 </template>
@@ -41,6 +25,7 @@
 import Toolbar from './components/Toolbar'
 import Sidebar from './components/Sidebar'
 import PageTabbar from './components/Toolbar/PageTabbar'
+import PageContent from './components/PageContent'
 
 export default {
   name: 'MainLayout',
@@ -48,6 +33,7 @@ export default {
     PageTabbar,
     Toolbar,
     Sidebar,
+    PageContent,
   },
   data () {
     return {
