@@ -4,7 +4,7 @@ import { LoadingBar, Notify } from 'quasar'
 
 import store from '@/store'
 import config from '@/config'
-import { setTitle, error } from '@/utils'
+import { setTitle, error, ls } from '@/utils'
 import routes from './routes'
 
 // fix vue-router NavigationDuplicated
@@ -44,8 +44,8 @@ const nextToLogin = (to, next) => {
 // 路由守卫
 router.beforeEach((to, from, next) => {
   LoadingBar.start()
-  const { role } = store.state.QA.user.userInfo
-  const { token, timeStamp, expires } = store.state.QA.user.token
+  const { role } = ls.get('user_info') || {}
+  const { token, timeStamp, expires } = ls.get('token') || {}
 
   if (to.name !== config.loginPageName) {
     // 不需要权限
