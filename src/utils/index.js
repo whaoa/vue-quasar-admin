@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { LocalStorage, Notify } from 'quasar'
+import { LocalStorage, Notify, openURL } from 'quasar'
 import config from '@/config'
 import log from './log'
 
@@ -57,13 +57,7 @@ export const openPage = url => {
     error.create('打开新标签页时URL为空')
     return
   }
-  const a = document.createElement('a')
-  a.setAttribute('href', url)
-  a.setAttribute('target', '_blank')
-  a.setAttribute('id', `${appName}-new-tab-link`)
-  document.body.appendChild(a)
-  a.click()
-  document.body.removeChild(document.getElementById(`${appName}-new-tab-link`))
+  openURL(url)
 }
 
 /**

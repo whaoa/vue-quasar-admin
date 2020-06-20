@@ -1,5 +1,4 @@
-import log from '@/utils/log'
-import { setTitle, openPage, dateFormat, isDev } from '@/utils'
+import { setTitle, openPage, dateFormat, isDev, log } from '@/utils'
 
 export default {
   async install (Vue) {

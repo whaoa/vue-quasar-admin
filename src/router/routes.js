@@ -6,12 +6,12 @@ const MainLayout = () => import('@/layouts/main')
  * ** 页面组件必须有 name 字段，QAdmin 依赖于 name 字段进行页面跳转 **
  *
  * QA 定义配置项：
- * meta {Object} 路由信息配置对象
- * meta.icon {String} 路由侧边栏图标
- * meta.title {String} 路由页面标题
- * meta.hidden {Boolean} 是否在侧边栏隐藏
- * meta.auth {Array<String>} 路由权限配置
- * TODO: meta.href {String} - 外部链接
+ * meta {Object} - 路由信息配置对象
+ * meta.icon {String} - 路由侧边栏图标
+ * meta.title {String} - 路由页面标题
+ * meta.hidden {Boolean} - 是否在侧边栏隐藏
+ * meta.auth {Array<String>} - 路由权限配置
+ * meta.href {String} - 外部链接
  * TODO: meta.cache {Boolean} - 页面缓存
  */
 
@@ -54,6 +54,15 @@ export const pageRoutes = [
         },
         component: () => import('@/views/About'),
       },
+      {
+        path: 'github',
+        name: 'github',
+        meta: {
+          title: '代码仓库',
+          icon: 'code',
+          href: 'https://github.com/whaoa/vue-quasar-admin',
+        },
+      },
     ],
   },
 ]
@@ -68,7 +77,7 @@ export const systemRoutes = [
   {
     path: '/refresh',
     name: 'refresh',
-    meta: { title: '页面重载', hidden: false },
+    meta: { title: '页面重载', hidden: true },
     component: () => import('@/views/system/refresh'),
   },
   {
