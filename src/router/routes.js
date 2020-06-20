@@ -65,7 +65,12 @@ export const systemRoutes = [
     meta: { title: '用户登录', hidden: true },
     component: () => import('@/views/login'),
   },
-  // TODO: refresh 刷新页面
+  {
+    path: '/refresh',
+    name: 'refresh',
+    meta: { title: '页面重载', hidden: false },
+    component: () => import('@/views/system/refresh'),
+  },
   {
     path: '/error',
     name: 'error',
