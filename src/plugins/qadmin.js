@@ -27,7 +27,7 @@ export default {
         log.danger('>>>>>> Vue 实例 >>>>>>')
         console.log(vm)
         log.danger('>>>>>> Error >>>>>>')
-        console.log(error)
+        console.error(error)
       })
     }
     if (isDev) Vue.config.warnHandler = logger('warning')

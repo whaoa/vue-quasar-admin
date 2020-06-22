@@ -28,7 +28,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'PageContent',
   computed: {
-    ...mapGetters('QA/page', ['cache']),
+    ...mapGetters('qadmin/page', ['cache']),
   },
 }
 </script>

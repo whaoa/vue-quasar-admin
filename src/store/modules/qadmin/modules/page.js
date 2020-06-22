@@ -121,7 +121,7 @@ export default {
      * @returns {Promise<void>}
      */
     async compileRoutes ({ commit, rootState }, role) {
-      const routesArray = await filterRoutes(routes, role || rootState.QA.user.role)
+      const routesArray = await filterRoutes(routes, role || rootState.qadmin.user.role)
       commit('setRoutes', routesArray)
     },
   },

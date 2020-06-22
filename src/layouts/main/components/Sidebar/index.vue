@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Menus from './Menus'
 
 export default {
@@ -36,9 +37,7 @@ export default {
     }
   },
   computed: {
-    routes () {
-      return this.$store.state.QA.page.routes
-    },
+    ...mapState('qadmin/page', ['routes']),
   },
 }
 </script>

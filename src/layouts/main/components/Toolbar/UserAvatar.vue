@@ -11,7 +11,7 @@
             <q-item-section>{{ name }}</q-item-section>
           </q-item>
           <q-separator />
-          <q-item clickable @click="$store.dispatch('QA/user/logout')">
+          <q-item clickable @click="$store.dispatch('qadmin/user/logout')">
             <q-item-section>退出登录</q-item-section>
           </q-item>
         </template>
@@ -31,7 +31,7 @@ import config from '@/config'
 export default {
   name: 'UserAvatar',
   computed: {
-    ...mapState('QA/user', {
+    ...mapState('qadmin/user', {
       uid: state => state.userInfo.uid,
       name: state => state.userInfo.name,
     }),

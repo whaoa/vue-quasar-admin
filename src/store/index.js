@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import QA from './modules/qa'
+import qadmin from './modules/qadmin'
 
 Vue.use(Vuex)
 
@@ -10,6 +10,6 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    QA,
+    qadmin,
   },
 })

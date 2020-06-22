@@ -34,7 +34,7 @@ const errorNotify = message => {
 
 // 重定向到登录页
 const nextToLogin = (to, next) => {
-  store.dispatch('QA/user/clearLoginStatus')
+  store.dispatch('qadmin/user/clearLoginStatus')
   return next({
     name: config.loginPageName,
     query: { redirect: to.fullPath },
@@ -84,7 +84,7 @@ router.afterEach(to => {
   // 进度条
   LoadingBar.stop()
   // 记录打开新标签页
-  store.commit('QA/page/open', to)
+  store.commit('qadmin/page/open', to)
   // 更改标题
   setTitle(to.meta.title)
 })

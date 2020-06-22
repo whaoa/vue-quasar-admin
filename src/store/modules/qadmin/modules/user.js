@@ -107,7 +107,7 @@ export default {
      */
     clearLoginStatus ({ commit, dispatch }) {
       commit('clearStatus')
-      dispatch('QA/page/compileRoutes', undefined, { root: true })
+      dispatch('qadmin/page/compileRoutes', undefined, { root: true })
     },
     /**
      * 初始化登录状态
@@ -122,7 +122,7 @@ export default {
       // 设置用户细腻
       commit('setUserInfo', userInfo)
       // 处理路由权限
-      dispatch('QA/page/compileRoutes', userInfo.role, { root: true })
+      dispatch('qadmin/page/compileRoutes', userInfo.role, { root: true })
     },
   },
 }

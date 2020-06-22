@@ -43,11 +43,11 @@ export default {
     }
   },
   computed: {
-    ...mapState('QA/page', ['tabs']),
-    ...mapGetters('QA/page', ['active']),
+    ...mapState('qadmin/page', ['tabs']),
+    ...mapGetters('qadmin/page', ['active']),
   },
   methods: {
-    ...mapMutations('QA/page', ['closeOne', 'closeSide', 'closeOthers', 'closeAll']),
+    ...mapMutations('qadmin/page', ['closeOne', 'closeSide', 'closeOthers', 'closeAll']),
   },
 }
 </script>

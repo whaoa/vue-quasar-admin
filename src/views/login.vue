@@ -86,7 +86,7 @@ export default {
       this.$refs.loginForm.validate().then(async success => {
         if (success) {
           this.loading = true
-          this.$store.dispatch('QA/user/login', this.form)
+          this.$store.dispatch('qadmin/user/login', this.form)
             .then(() => {
               this.$q.notify({
                 color: 'green-4',

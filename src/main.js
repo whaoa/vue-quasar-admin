@@ -2,7 +2,7 @@ import Vue from 'vue'
 // 粒子背景
 import VueParticles from 'vue-particles'
 
-import QA from '@/plugins/qa'
+import QAdmin from '@/plugins/qadmin'
 
 import App from './App'
 import router from './router'
@@ -14,7 +14,7 @@ import './mock'
 import './styles/transition.scss'
 
 Vue.use(VueParticles)
-Vue.use(QA)
+Vue.use(QAdmin)
 
 Vue.config.productionTip = false
 

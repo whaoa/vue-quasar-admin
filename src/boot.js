@@ -5,9 +5,9 @@ export default function created () {
   const { token, timeStamp, expires } = ls.get('token') || {}
   // 如果本地缓存 token 无效
   if (!token || timeStamp + expires < Date.now()) {
-    this.$store.dispatch('QA/user/clearLoginStatus')
+    this.$store.dispatch('qadmin/user/clearLoginStatus')
   } else {
-    this.$store.dispatch('QA/user/initLoginStatus', {
+    this.$store.dispatch('qadmin/user/initLoginStatus', {
       userInfo,
       token: { token, timeStamp, expires },
     })
