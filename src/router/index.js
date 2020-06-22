@@ -48,8 +48,8 @@ router.beforeEach((to, from, next) => {
   const { token, timeStamp, expires } = ls.get('token') || {}
 
   if (to.name !== config.loginPageName) {
-    // 不需要权限
-    if (!to.meta || !to.meta.auth) return next()
+    // 如果路由中所有层级都不需要权限
+    if (to.matched.every(r => (!(r.meta || {}).auth))) return next()
     // 需要权限
     // 未登录
     if (!token) {
