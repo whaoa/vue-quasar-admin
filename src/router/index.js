@@ -34,7 +34,7 @@ const errorNotify = message => {
 
 // 重定向到登录页
 const nextToLogin = (to, next) => {
-  store.commit('QA/user/clearLoginStatus')
+  store.dispatch('QA/user/clearLoginStatus')
   return next({
     name: config.loginPageName,
     query: { redirect: to.fullPath },

@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import routes from '@/router/routes'
 import Menus from './Menus'
 
 export default {
@@ -25,7 +24,6 @@ export default {
   components: { Menus },
   data () {
     return {
-      routes,
       buttons: [
         { text: 'About' },
         { text: 'Press' },
@@ -36,6 +34,11 @@ export default {
         { text: 'Developers' },
       ],
     }
+  },
+  computed: {
+    routes () {
+      return this.$store.state.QA.page.routes
+    },
   },
 }
 </script>

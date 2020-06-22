@@ -81,3 +81,6 @@ export const ls = {
   getAll: () => LocalStorage.getAll(),
   clear: () => LocalStorage.clear(),
 }
+
+// 路由相关处理方法导出
+export { filterRoutes, flatRoutes } from './router'

@@ -12,7 +12,7 @@ const MainLayout = () => import('@/layouts/main')
  * meta.hidden {Boolean} - 是否在侧边栏隐藏
  * meta.auth {Array<String>} - 路由权限配置
  * meta.href {String} - 外部链接
- * meta.cache {Boolean} - 页面缓存
+ * meta.cache {Boolean} - 页面缓存 需要保证组件内导出时有 name 属性, 该配置项仅可用于页面组件，有 children 属性的配置将会忽略
  */
 
 export const pageRoutes = [

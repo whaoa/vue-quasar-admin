@@ -44,8 +44,8 @@ export default {
         state.token = payload
       }
     },
-    // 清除登录状态信息
-    clearLoginStatus (state) {
+    // 清除缓存的登录状态信息
+    clearStatus (state) {
       ls.remove('token')
       ls.remove('user_info')
       state.token = {}
@@ -62,12 +62,10 @@ export default {
      * @param payload.password {String} - 用户密码
      * @returns {Promise<Object>}
      */
-    async login ({ commit }, { username = '', password = '' } = {}) {
+    async login ({ dispatch }, { username = '', password = '' } = {}) {
       const result = await Login({ username, password })
-      // 设置 token
-      await commit('setToken', result.token)
-      // 设置 vuex 用户信息
-      await commit('setUserInfo', result)
+      // 初始化登录状态
+      await dispatch('initLoginStatus', { userInfo: result, token: result.token })
       return result
     },
     /**
@@ -77,10 +75,10 @@ export default {
      * @param payload {Object} - 数据对象
      * @param [payload.needConfirm=false] {Boolean} - 是否需要确认弹窗
      */
-    logout ({ commit }, { needConfirm = false } = {}) {
+    logout ({ dispatch }, { needConfirm = false } = {}) {
       function logout () {
         // 清空登录状态信息
-        commit('clearLoginStatus')
+        dispatch('clearLoginStatus')
         // 跳转路由
         router.push({ name: 'login' })
         // 消息提示
@@ -100,6 +98,31 @@ export default {
       })
         .onOk(() => logout())
         .onCancel(() => Notify.create({ message: '取消注销操作' }))
+    },
+
+    /**
+     * 清空所有登录状态
+     * @param commit {Function}
+     * @param dispatch {Function}
+     */
+    clearLoginStatus ({ commit, dispatch }) {
+      commit('clearStatus')
+      dispatch('QA/page/compileRoutes', undefined, { root: true })
+    },
+    /**
+     * 初始化登录状态
+     * @param commit {Function}
+     * @param dispatch {Function}
+     * @param userInfo {Object} - 用户信息
+     * @param token {Object | String} - 用户登录 token 信息
+     */
+    initLoginStatus ({ commit, dispatch }, { userInfo, token }) {
+      // 设置 token
+      commit('setToken', token)
+      // 设置用户细腻
+      commit('setUserInfo', userInfo)
+      // 处理路由权限
+      dispatch('QA/page/compileRoutes', userInfo.role, { root: true })
     },
   },
 }

@@ -1,35 +1,35 @@
 import config from '@/config'
 import router from '@/router'
-import { systemRoutes } from '@/router/routes'
+import routes, { systemRoutes } from '@/router/routes'
+import { filterRoutes, flatRoutes } from '@/utils'
 
+// 不在Tab栏显示的路由列表
 const notSave = systemRoutes.map(i => i.name)
 notSave.push(config.homePageName)
-
-// 路由跳转
-const push = (state, index) => {
-  const route = {}
-  const active = state.tabs[index === undefined ? state.activeIndex : index]
-  // 如果还有已打开的标签页
-  if (active) route.path = active.fullPath
-  // 如果已打开标签页列表为空
-  else route.name = config.homePageName
-  return router.push(route)
-}
 
 export default {
   namespaced: true,
   state: {
+    // 路由配置列表
+    routes: [],
     // 已打开标签页列表
     tabs: [],
     // 激活标签页索引
     activeIndex: -1,
   },
   getters: {
+    // 激活标签页信息
     active (state) {
       return {
         index: state.activeIndex,
         active: state.tabs[state.activeIndex],
       }
+    },
+    // 可缓存页面组件名称
+    cache (state) {
+      return flatRoutes(state.routes)
+        .map(i => ((i.meta || {}).cache ? i.componentName : undefined))
+        .filter(i => i)
     },
   },
   mutations: {
@@ -63,7 +63,13 @@ export default {
       // 如果关闭的标签页在激活标签页的前面
       if (state.activeIndex >= tabIndex) state.activeIndex -= 1
       // 跳转页面
-      await push(state)
+      const route = {}
+      const active = state.tabs[state.activeIndex]
+      // 如果还有已打开的标签页
+      if (active) route.path = active.fullPath
+      // 如果已打开标签页列表为空
+      else route.name = config.homePageName
+      await router.push(route)
     },
 
     /**
@@ -95,6 +101,28 @@ export default {
       state.tabs = []
       state.activeIndex = -1
       await router.push({ name: config.homePageName })
+    },
+
+    /**
+     * 生成权限路由列表
+     * @param state {Object} - Vuex Store 数据
+     * @param routesArray {Array} - 处理后的路由配置数组
+     */
+    setRoutes (state, routesArray = []) {
+      state.routes = routesArray
+    },
+  },
+  actions: {
+    /**
+     * 处理权限路由配置
+     * @param commit {Function}
+     * @param rootState {Object} Store 根数据
+     * @param role {String} - 账号权限信息
+     * @returns {Promise<void>}
+     */
+    async compileRoutes ({ commit, rootState }, role) {
+      const routesArray = await filterRoutes(routes, role || rootState.QA.user.role)
+      commit('setRoutes', routesArray)
     },
   },
 }

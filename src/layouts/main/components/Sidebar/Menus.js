@@ -12,11 +12,10 @@ export default {
   methods: {
     // 生成组件树
     renderMenus (createElement, data) {
-      const result = []
-      data.forEach((item, index) => {
-        const { meta = {}, children, name } = item
+      return data.reduce((result, route, index) => {
+        const { meta = {}, children, name } = route
         // 如果设置不显示
-        if (meta.hidden) return
+        if (meta.hidden) return result
         // 如果包含子路由
         if (children && children.length) {
           // 创建折叠菜单
@@ -31,7 +30,7 @@ export default {
           result.push(group)
           // 添加分割线
           result.push(createElement('q-separator'))
-          return
+          return result
         }
         // 如果是菜单项
         const icon = createElement('q-item-section', { props: { avatar: true } }, [createElement('q-icon', { props: { name: meta.icon } })])
@@ -57,8 +56,8 @@ export default {
         result.push(createElement('q-item', attrs, [icon, label]))
         // 如果不是最后一项，添加分割线
         if (index !== data.length - 1) result.push(createElement('q-separator'))
-      })
-      return result
+        return result
+      }, [])
     },
   },
   render (createElement) {

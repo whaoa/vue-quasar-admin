@@ -9,12 +9,13 @@
         :label="item.meta && item.meta.title || item.name"
       />
     </q-breadcrumbs>
-    <transition-group appear mode="out-in" name="fade-transverse">
-      <keep-alive key="cache">
-        <router-view v-if="($route.meta || {}).cache" />
+    <!-- 路由 -->
+    <transition appear mode="out-in" name="fade-transverse">
+      <keep-alive :include="cache">
+        <router-view />
       </keep-alive>
-      <router-view key="reload" v-if="!($route.meta || {}).cache" />
-    </transition-group>
+    </transition>
+    <!-- 返回顶部 -->
     <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
       <q-btn fab icon="keyboard_arrow_up" color="accent" />
     </q-page-scroller>
@@ -22,12 +23,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'PageContent',
   computed: {
-    ...mapState('QA/page', ['cache']),
+    ...mapGetters('QA/page', ['cache']),
   },
 }
 </script>
